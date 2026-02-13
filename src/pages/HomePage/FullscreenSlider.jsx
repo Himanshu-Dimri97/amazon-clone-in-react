@@ -23,7 +23,7 @@ const FullscreenSlider = () => {
         autoplaySpeed: 3000,
     };
     return (
-        <div className="relative w-full h-150">
+        <div className="relative w-full h-160">
             <Slider {...settings} style={{ height: "100%" }}>
                 {slides.map((slide, index) => (
                     <div key={index}>
@@ -41,8 +41,8 @@ const FullscreenSlider = () => {
                     {
                         data.map((item, index) => {
                             return (
-                                <div className="w-[23%] bg-white p-5 shadow-lg rounded">
-                                    <h2 className="text-xl font-bold text-black text-center">{item.itemTitle}</h2>
+                                <div className="w-[23%] bg-white p-5 shadow rounded">
+                                    <h2 className="text-xl font-bold text-black">{item.itemTitle}</h2>
                                     <div className="grid grid-cols-2 gap-2 mt-3">
                                         {
                                             item.imgData.map((dt, index) => {
