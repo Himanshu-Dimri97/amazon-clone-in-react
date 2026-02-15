@@ -1,13 +1,13 @@
-import React from 'react'
 import { MapPin, Search, ShoppingCart } from "lucide-react";
+import { Link } from 'react-router-dom';
 
 const NavbarBelt = () => {
     return (
         <div className='flex justify-evenly gap-2 bg-[#131921] h-15 p-1'>
-            <div className='flex px-1 pt-3 border border-transparent hover:border hover:border-white'>
+            <Link to={'/'} className='flex px-1 pt-3 border border-transparent hover:border hover:border-white'>
                 <img src='assets/amazon_logo.png' className='h-10 width-[100px]' />
                 <span className='text-white text-sm pt-1'>.in</span>
-            </div>
+            </Link>
             <div className='px-1 pt-2 border border-transparent hover:border hover:border-white'>
                 <p className='text-[12px] text-white pl-5'>Delivering to New Delhi 110020</p>
                 <div className='flex'>

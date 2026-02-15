@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -41,13 +40,13 @@ const FullscreenSlider = () => {
                     {
                         data.map((item, index) => {
                             return (
-                                <div className="w-[23%] bg-white p-5 shadow rounded">
+                                <div key={index} className="w-[23%] bg-white p-5 shadow rounded">
                                     <h2 className="text-xl font-bold text-black">{item.itemTitle}</h2>
                                     <div className="grid grid-cols-2 gap-2 mt-3">
                                         {
                                             item.imgData.map((dt, index) => {
                                                 return (
-                                                    <div className="">
+                                                    <div key={index} className="">
                                                         <img src={dt.img} />
                                                         <a href="#" className="text-black text-[12px] leading-4 inline-block">{dt.title}</a>
                                                     </div>

@@ -8,7 +8,7 @@ const ProductCard = ({ product }) => {
     );
 
     return (
-        <div className="bg-white w-[23%] p-4 rounded-md shadow">
+        <div key={product.id} className="bg-white w-[23%] p-4 rounded-md shadow">
 
             <h2 className="text-xl font-bold text-black mb-3">{product.title}</h2>
 
