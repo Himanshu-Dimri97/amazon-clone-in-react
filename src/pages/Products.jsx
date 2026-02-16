@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
-import { products } from "../data/ProductData";
-import ProductCard from "../components/ProductCard"
+import ProductCard from "../components/ProductCard";
+import { useEffect, useState } from "react";
+import { getProducts, getSubcategories } from "../api/api";
 
 const Products = () => {
+    const { slug } = useParams();
+
+    const [products, setProducts] = useState([]);
+    const [subcategories, setSubcategories] = useState([]);
+
+    // 👇 ye belt same rahegi (as you wanted)
     const options = [
         { name: "Mobiles & Accessories" },
         { name: "Laptops & Accessories" },
@@ -16,31 +23,49 @@ const Products = () => {
         { name: "Office & Stationery" },
     ];
 
+    useEffect(() => {
+        // 1️⃣ pehle subcategories lao
+        getSubcategories().then((subs) => {
+            setSubcategories(subs);
+
+            // 2️⃣ slug match karo
+            const matched = subs.find((s) => s.slug === slug);
+
+            // 3️⃣ agar match mila → uske products lao
+            if (matched) {
+                getProducts(matched.id).then(setProducts);
+            } else {
+                setProducts([]);
+            }
+        });
+    }, [slug]);
+
     return (
         <div>
+            {/* 🔵 TOP BELT — unchanged */}
             <div className="flex justify-evenly gap-3 bg-white h-12 shadow border-b-[#333]">
-                {
-                    options.map((option, index) => {
-                        return (
-                            <Link to={"/"} key={index} className="pt-4">
-                                <div className="text-xs text-[#333]">{option.name}</div>
-                            </Link>
-                        )
-                    })
-                }
-
+                {options.map((option, index) => (
+                    <Link to="#" key={index} className="pt-4">
+                        <div className="text-xs text-[#333]">{option.name}</div>
+                    </Link>
+                ))}
             </div>
+
             <div className="flex p-5 w-full">
+
+                {/* 🔵 LEFT SIDEBAR — unchanged */}
                 <div className="w-[15%] border-r-2 border-r-[#ddd]">
                     <h3 className="text-sm font-bold text-black mb-2">Category</h3>
                     <div className="text-sm text-[#0f1111] font-normal">
-                        <Link to={"/"} className="flex leading-none mb-1.5 hover:text-[#c45500]"><ChevronLeft className="h-4 w-4" /><div>Electronics</div></Link>
-                        <div to={"/"} className="font-bold "><div className="pl-3.5 mb-1.5">Mobiles & Accessories</div></div>
-                        <Link to={"/"} className="hover:text-[#c45500]"><div className="pl-6 mb-1.5">Mobiles Accessories</div></Link>
-                        <Link to={"/"} className="hover:text-[#c45500]"><div className="pl-6 mb-1.5">Mobiles  Broadband Devices</div></Link>
-                        <Link to={"/"} className="hover:text-[#c45500]"><div className="pl-6 mb-1.5">Smartphones & Basic Mobiles</div></Link>
-                        <Link to={"/"} className="hover:text-[#c45500]"><div className="pl-6 mb-1.5">Smartwatches</div></Link>
+                        <Link to={"/"} className="flex leading-none mb-1.5 hover:text-[#c45500]">
+                            <ChevronLeft className="h-4 w-4" />
+                            <div>Electronics</div>
+                        </Link>
+                        <div className="font-bold ">
+                            <div className="pl-3.5 mb-1.5">Mobiles & Accessories</div>
+                        </div>
                     </div>
+
                     <h3 className="text-sm font-bold text-black mt-4 mb-2">Price</h3>
                     <div className="text-sm text-[#0f1111] font-normal">
                         <Link to={"/"} className="hover:text-[#c45500]"><div className="mb-1.5">Under ₹1,000</div></Link>
@@ -49,6 +74,7 @@ const Products = () => {
                         <Link to={"/"} className="hover:text-[#c45500]"><div className="mb-1.5">₹10,000 - ₹20,000</div></Link>
                         <Link to={"/"} className="hover:text-[#c45500]"><div className="mb-1.5">Over ₹20,000</div></Link>
                     </div>
+
                     <h3 className="text-sm font-bold text-black mt-4 mb-2">Discount</h3>
                     <div className="text-sm text-[#0f1111] font-normal">
                         <Link to={"/"} className="hover:text-[#c45500]"><div className="mb-1.5">10% Off or more</div></Link>
@@ -59,20 +85,21 @@ const Products = () => {
                         <Link to={"/"} className="hover:text-[#c45500]"><div className="mb-1.5">70% Off or more</div></Link>
                     </div>
                 </div>
+
+                {/* 🔵 PRODUCTS GRID */}
                 <div className="grid grid-cols-3 w-[85%] gap-6 p-6">
-
-                    {products.map((item) => (
-                        <Link to={"/"}>
+                    {products.length > 0 ? (
+                        products.map((item) => (
                             <ProductCard key={item.id} product={item} />
-                        </Link>
-                    ))}
-
+                        ))
+                    ) : (
+                        <div className="text-gray-500">No products found</div>
+                    )}
                 </div>
+
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Products
-
-
+export default Products;

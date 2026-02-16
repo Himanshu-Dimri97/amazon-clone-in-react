@@ -1,3 +1,5 @@
+import logo from "../../assets/amazon_logo.png";
+import india from "../../assets/india.svg";
 import { MapPin, Search, ShoppingCart } from "lucide-react";
 import { Link } from 'react-router-dom';
 
@@ -5,7 +7,7 @@ const NavbarBelt = () => {
     return (
         <div className='flex justify-evenly gap-2 bg-[#131921] h-15 p-1'>
             <Link to={'/'} className='flex px-1 pt-3 border border-transparent hover:border hover:border-white'>
-                <img src='assets/amazon_logo.png' className='h-10 width-[100px]' />
+                <img src={logo} className='h-10 width-[100px]' />
                 <span className='text-white text-sm pt-1'>.in</span>
             </Link>
             <div className='px-1 pt-2 border border-transparent hover:border hover:border-white'>
@@ -26,7 +28,7 @@ const NavbarBelt = () => {
                 <button className='bg-[#febd69] w-12 flex justify-center p-2.5 my-1.5 rounded-r-lg'><Search className="w-5.5 h-5.5 text-black" /></button>
             </div>
             <div className='flex align-center gap-1 px-1 pt-4 border border-transparent hover:border hover:border-white'>
-                <img src='assets/india.svg' className='h-5 w-5' />
+                <img src={india} className='h-5 w-5' />
                 <span className='pl-1 text-sm font-bold text-white'>En</span>
                 <div className="w-0 h-0 mt-2
                                border-l-4 border-l-transparent
