@@ -9,20 +9,25 @@ const NavbarBanner = () => {
     const [subcategories, setSubcategories] = useState([]);
 
     useEffect(() => {
-        getNavbarLinks().then(setLinks);
-        getCategories().then(setCategories);
-        getSubcategories().then(setSubcategories);
+        Promise.all([
+            getNavbarLinks(),
+            getCategories(),
+            getSubcategories(),
+        ]).then(([links, cats, subs]) => {
+            setLinks(links);
+            setCategories(cats);
+            setSubcategories(subs);
+        });
     }, []);
 
-    const getCategorySlug = (id) => {
-        const cat = categories.find((c) => c.id === id);
-        return cat?.slug;
-    };
+    const categoryMap = Object.fromEntries(
+        (categories || []).map(c => [String(c.id), c.slug])
+    );
 
-    const getSubSlug = (id) => {
-        const sub = subcategories.find((s) => s.id === id);
-        return sub?.slug;
-    };
+    const subMap = Object.fromEntries(
+        (subcategories || []).map(s => [String(s.id), s.slug])
+    );
+
 
     return (
         <div className="flex items-center gap-4 px-3 bg-[#232f3e] h-10 overflow-x-auto">
@@ -33,20 +38,22 @@ const NavbarBanner = () => {
             </div>
 
             {links.map((link) => {
+                // console.log("LINK:", link)
+                // console.log("categoryMap:", categoryMap);
+                // console.log("subMap:", subMap);
                 let path = "#";
 
                 if (link.type === "static") {
                     path = link.path;
                 }
-
                 if (link.type === "category") {
-                    const slug = getCategorySlug(link.refId);
-                    path = `/${slug}`;
+                    const slug = categoryMap[String(link.refId)];
+                    path = slug ? `/${slug}` : "#";
                 }
 
                 if (link.type === "subcategory") {
-                    const slug = getSubSlug(link.refId);
-                    path = `/${slug}`;
+                    const slug = subMap[String(link.refId)];
+                    path = slug ? `/${slug}` : "#";
                 }
 
                 return (

@@ -10,7 +10,6 @@ const Products = () => {
     const [products, setProducts] = useState([]);
     const [subcategories, setSubcategories] = useState([]);
 
-    // 👇 ye belt same rahegi (as you wanted)
     const options = [
         { name: "Mobiles & Accessories" },
         { name: "Laptops & Accessories" },
@@ -24,14 +23,12 @@ const Products = () => {
     ];
 
     useEffect(() => {
-        // 1️⃣ pehle subcategories lao
+
         getSubcategories().then((subs) => {
             setSubcategories(subs);
 
-            // 2️⃣ slug match karo
             const matched = subs.find((s) => s.slug === slug);
 
-            // 3️⃣ agar match mila → uske products lao
             if (matched) {
                 getProducts(matched.id).then(setProducts);
             } else {
@@ -42,7 +39,7 @@ const Products = () => {
 
     return (
         <div>
-            {/* 🔵 TOP BELT — unchanged */}
+
             <div className="flex justify-evenly gap-3 bg-white h-12 shadow border-b-[#333]">
                 {options.map((option, index) => (
                     <Link to="#" key={index} className="pt-4">
@@ -53,7 +50,6 @@ const Products = () => {
 
             <div className="flex p-5 w-full">
 
-                {/* 🔵 LEFT SIDEBAR — unchanged */}
                 <div className="w-[15%] border-r-2 border-r-[#ddd]">
                     <h3 className="text-sm font-bold text-black mb-2">Category</h3>
                     <div className="text-sm text-[#0f1111] font-normal">
@@ -86,7 +82,6 @@ const Products = () => {
                     </div>
                 </div>
 
-                {/* 🔵 PRODUCTS GRID */}
                 <div className="grid grid-cols-3 w-[85%] gap-6 p-6">
                     {products.length > 0 ? (
                         products.map((item) => (
