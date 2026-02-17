@@ -2,8 +2,12 @@ import logo from "../../assets/amazon_logo.png";
 import india from "../../assets/india.svg";
 import { MapPin, Search, ShoppingCart } from "lucide-react";
 import { Link } from 'react-router-dom';
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 
 const NavbarBelt = () => {
+    const { cart } = useContext(CartContext);
+
     return (
         <div className='flex justify-evenly gap-2 bg-[#131921] h-15 p-1'>
             <Link to={'/'} className='flex px-1 pt-3 border border-transparent hover:border hover:border-white'>
@@ -53,10 +57,10 @@ const NavbarBelt = () => {
                 <p className='text-white text-sm font-bold leading-none'>& Orders</p>
             </div>
             <div className='flex items-center gap-1 px-1 pt-1 border border-transparent hover:border hover:border-white'>
-                <div>
-                    <span className='text-[#f08804] text-sm font-bold pl-1.5'>0</span>
+                <Link to={"/cart"}>
+                    <span className='text-[#f08804] text-sm font-bold pl-1.5'>  {cart.length}</span>
                     <ShoppingCart className='text-white font-extrabold' size={20} />
-                </div>
+                </Link>
                 <span className='text-white font-bold text-md'>Cart</span>
             </div>
         </div>

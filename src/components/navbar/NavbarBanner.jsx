@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getNavbarLinks, getCategories, getSubcategories } from "../../api/api";
 
+
 const NavbarBanner = () => {
+
     const [links, setLinks] = useState([]);
     const [categories, setCategories] = useState([]);
     const [subcategories, setSubcategories] = useState([]);

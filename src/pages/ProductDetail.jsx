@@ -1,11 +1,13 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
 import { getProductBySlug } from "../api/api";
+import { CartContext } from "../context/CartContext";
 
 const ProductDetail = () => {
+    const { addToCart, cart } = useContext(CartContext);
+    const navigate = useNavigate();
 
-    // ✅ NEW PARAMS (category + product slug)
-    const { categorySlug, slug } = useParams();
+    const { slug } = useParams();
 
     const [product, setProduct] = useState(null);
     const [mainImg, setMainImg] = useState(null);
@@ -20,16 +22,17 @@ const ProductDetail = () => {
         }
     }, [product]);
 
-    if (!product) return <h1 className="p-10">Product not found</h1>;
+    if (!product) return <h1 className="p-10">Loading...</h1>;
 
     const discountPrice = Math.floor(
         product.price - (product.price * product.discount) / 100
     );
 
+    const isAdded = cart.some(item => item.id === product.id);
+
     return (
         <div className="w-full mx-auto px-6 py-8 grid grid-cols-12 gap-6">
 
-            {/* LEFT SIDE IMAGES */}
             <div className="col-span-4 flex gap-4">
 
                 <div className="flex flex-col gap-3">
@@ -51,7 +54,6 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            {/* CENTER DETAILS */}
             <div className="col-span-5 space-y-4">
 
                 <h1 className="text-2xl font-medium leading-tight">
@@ -113,7 +115,6 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            {/* RIGHT BUY BOX */}
             <div className="col-span-3 border rounded-lg p-5 space-y-4 h-fit sticky top-20 shadow-sm">
 
                 <div className="text-2xl font-semibold text-black">
@@ -124,8 +125,21 @@ const ProductDetail = () => {
                     FREE delivery available
                 </p>
 
-                <button className="w-full bg-yellow-400 py-2 rounded-full font-medium hover:bg-yellow-500 transition">
-                    Add to Cart
+                <button
+                    onClick={() => {
+                        if (isAdded) {
+                            navigate("/cart");
+                        } else {
+                            addToCart(product);
+                        }
+                    }}
+                    className={`w-full py-2 rounded-full font-medium transition 
+                        ${isAdded
+                            ? "bg-orange-500 text-white hover:bg-orange-600"
+                            : "bg-yellow-400 hover:bg-yellow-500"
+                        }`}
+                >
+                    {isAdded ? "Go to Cart" : "Add to Cart"}
                 </button>
 
                 <button className="w-full bg-orange-500 py-2 rounded-full text-white font-medium hover:bg-orange-600 transition">
@@ -135,7 +149,6 @@ const ProductDetail = () => {
                 <div className="text-xs text-gray-600 pt-2">
                     Secure transaction
                 </div>
-
             </div>
         </div>
     );

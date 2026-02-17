@@ -4,11 +4,10 @@ import ProductCard from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import { getProducts, getSubcategories } from "../api/api";
 
-const Products = () => {
+const ProductPage = () => {
     const { slug } = useParams();
 
     const [products, setProducts] = useState([]);
-    const [subcategories, setSubcategories] = useState([]);
 
     const options = [
         { name: "Mobiles & Accessories" },
@@ -25,7 +24,6 @@ const Products = () => {
     useEffect(() => {
 
         getSubcategories().then((subs) => {
-            setSubcategories(subs);
 
             const matched = subs.find((s) => s.slug === slug);
 
@@ -97,4 +95,4 @@ const Products = () => {
     );
 };
 
-export default Products;
+export default ProductPage;
