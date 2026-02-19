@@ -1,12 +1,9 @@
 import { useLocation, Link } from "react-router-dom";
 
 const OrderSuccess = () => {
+
     const location = useLocation();
     const order = location.state;
-
-    if (!order) {
-        return <h2>No order data found</h2>;
-    }
 
     return (
         <div className="flex flex-col items-center justify-center min-h-[80vh] p-6 text-center">
@@ -41,7 +38,7 @@ const OrderSuccess = () => {
 
             <Link
                 to="/"
-                className="mt-6 bg-blue-600 text-white px-6 py-3 rounded"
+                className="mt-6 bg-[#131921] text-white px-6 py-3 rounded"
             >
                 Continue Shopping
             </Link>

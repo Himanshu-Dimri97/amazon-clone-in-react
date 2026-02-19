@@ -22,7 +22,19 @@ const ProductDetail = () => {
         }
     }, [product]);
 
-    if (!product) return <h1 className="p-10">Loading...</h1>;
+    if (!product) {
+        return (
+            <div className="h-screen flex flex-col items-center justify-center">
+
+                <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+
+                <p className="mt-4 text-lg text-gray-600">
+                    Loading your order...
+                </p>
+
+            </div>
+        );
+    }
 
     const discountPrice = Math.floor(
         product.price - (product.price * product.discount) / 100
@@ -140,10 +152,6 @@ const ProductDetail = () => {
                         }`}
                 >
                     {isAdded ? "Go to Cart" : "Add to Cart"}
-                </button>
-
-                <button className="w-full bg-orange-500 py-2 rounded-full text-white font-medium hover:bg-orange-600 transition">
-                    Buy Now
                 </button>
 
                 <div className="text-xs text-gray-600 pt-2">

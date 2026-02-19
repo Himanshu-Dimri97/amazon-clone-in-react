@@ -8,6 +8,7 @@ const ProductPage = () => {
     const { slug } = useParams();
 
     const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const options = [
         { name: "Mobiles & Accessories" },
@@ -27,11 +28,26 @@ const ProductPage = () => {
             console.log(matched);
             if (matched) {
                 getProducts(matched.id).then(setProducts);
+                setLoading(false);
             } else {
                 setProducts([]);
             }
         });
     }, [slug]);
+
+    if (loading) {
+        return (
+            <div className="h-screen flex flex-col items-center justify-center">
+
+                <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+
+                <p className="mt-4 text-lg text-gray-600">
+                    Loading your order...
+                </p>
+
+            </div>
+        );
+    }
 
     return (
         <div>
