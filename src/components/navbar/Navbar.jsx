@@ -1,4 +1,3 @@
-import React from 'react'
 import NavbarBelt from './NavbarBelt'
 import NavbarBanner from './NavbarBanner'
 

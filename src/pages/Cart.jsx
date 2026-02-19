@@ -120,7 +120,7 @@ const Cart = () => {
                 <span>₹{total}</span>
               </div>
 
-              <button className="bg-yellow-400 hover:bg-yellow-500 w-full mt-6 py-3 rounded font-semibold">
+              <button onClick={() => navigate("/checkout")} className="bg-yellow-400 hover:bg-yellow-500 w-full mt-6 py-3 rounded font-semibold">
                 Proceed to Buy
               </button>
             </div>

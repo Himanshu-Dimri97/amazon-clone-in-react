@@ -15,8 +15,8 @@ const CartProvider = ({ children }) => {
 
     const addToCart = (product) => {
         setCart(prev => {
-            const exists = prev.find(item => item.id === product.id);
-            if (exists) return prev;
+            // const exists = prev.find(item => item.id === product.id);
+            // if (exists) return prev;
             return [...prev, { ...product, qty: 1 }];
         });
     };
@@ -45,7 +45,7 @@ const CartProvider = ({ children }) => {
 
     return (
         <CartContext.Provider
-            value={{ cart, addToCart, removeFromCart, increaseQty, decreaseQty }}
+            value={{ cart, setCart, addToCart, removeFromCart, increaseQty, decreaseQty }}
         >
             {children}
         </CartContext.Provider>

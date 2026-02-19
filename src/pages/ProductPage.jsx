@@ -22,11 +22,9 @@ const ProductPage = () => {
     ];
 
     useEffect(() => {
-
         getSubcategories().then((subs) => {
-
             const matched = subs.find((s) => s.slug === slug);
-
+            console.log(matched);
             if (matched) {
                 getProducts(matched.id).then(setProducts);
             } else {

@@ -4,10 +4,10 @@ import { getProductBySlug } from "../api/api";
 import { CartContext } from "../context/CartContext";
 
 const ProductDetail = () => {
+    const { slug } = useParams();
+
     const { addToCart, cart } = useContext(CartContext);
     const navigate = useNavigate();
-
-    const { slug } = useParams();
 
     const [product, setProduct] = useState(null);
     const [mainImg, setMainImg] = useState(null);

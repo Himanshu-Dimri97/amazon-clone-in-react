@@ -23,11 +23,11 @@ const NavbarBanner = () => {
     }, []);
 
     const categoryMap = Object.fromEntries(
-        (categories || []).map(c => [String(c.id), c.slug])
+        (categories || []).map(c => [c.id, c.slug])
     );
 
     const subMap = Object.fromEntries(
-        (subcategories || []).map(s => [String(s.id), s.slug])
+        (subcategories || []).map(s => [s.id, s.slug])
     );
 
 
@@ -40,21 +40,19 @@ const NavbarBanner = () => {
             </div>
 
             {links.map((link) => {
-                // console.log("LINK:", link)
-                // console.log("categoryMap:", categoryMap);
-                // console.log("subMap:", subMap);
+
                 let path = "#";
 
                 if (link.type === "static") {
                     path = link.path;
                 }
                 if (link.type === "category") {
-                    const slug = categoryMap[String(link.refId)];
+                    const slug = categoryMap[link.refId];
                     path = slug ? `/${slug}` : "#";
                 }
 
                 if (link.type === "subcategory") {
-                    const slug = subMap[String(link.refId)];
+                    const slug = subMap[link.refId];
                     path = slug ? `/${slug}` : "#";
                 }
 

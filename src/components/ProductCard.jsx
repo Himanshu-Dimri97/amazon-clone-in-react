@@ -8,7 +8,8 @@ const ProductCard = ({ product }) => {
         if (text.length <= limit) return text;
         return text.slice(0, limit) + "...";
     };
-    console.log(product);
+
+    console.log(limitChars(product.title, 40));
     return (
         <Link to={`/${product.subSlug}/${product.slug}`}>
             <div className="bg-white border-[#f5f5f5] h-90 p-3 mb-4 rounded shadow hover:shadow-md transition">

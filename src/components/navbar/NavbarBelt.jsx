@@ -7,6 +7,7 @@ import { CartContext } from "../../context/CartContext";
 
 const NavbarBelt = () => {
     const { cart } = useContext(CartContext);
+    console.log(cart);
 
     return (
         <div className='flex justify-evenly gap-2 bg-[#131921] h-15 p-1'>

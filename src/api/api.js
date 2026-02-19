@@ -36,5 +36,6 @@ export const getMobileProducts = async () => {
 export const getProductBySlug = async (slug) => {
     const res = await fetch(`${BASE_URL}/products?slug=${slug}`);
     const data = await res.json();
+    console.log(data);
     return data[0];
 };
