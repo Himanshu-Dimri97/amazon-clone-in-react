@@ -1,4 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
+import Button from "../components/Button";
 
 const OrderSuccess = () => {
 
@@ -16,7 +17,7 @@ const OrderSuccess = () => {
                 Thanks {order.customer.name}
             </p>
 
-            <div className="bg-white shadow rounded p-6 max-w-md w-full text-left">
+            <div className="bg-white shadow rounded p-6 mb-2 max-w-md w-full text-left">
                 <h2 className="font-semibold mb-2">Delivery To:</h2>
 
                 <p>{order.customer.name}</p>
@@ -36,11 +37,8 @@ const OrderSuccess = () => {
                 </p>
             </div>
 
-            <Link
-                to="/"
-                className="mt-6 bg-[#131921] text-white px-6 py-3 rounded"
-            >
-                Continue Shopping
+            <Link to="/">
+                <Button text={"Continue Shopping"} />
             </Link>
         </div>
     );

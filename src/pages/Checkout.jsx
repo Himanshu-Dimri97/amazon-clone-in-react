@@ -1,6 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import Input from "../components/Input";
 
 const Checkout = () => {
     const navigate = useNavigate();
@@ -63,70 +65,33 @@ const Checkout = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
 
-                    <input
-                        required
-                        type="text"
-                        placeholder="Full Name"
-                        className="w-full border p-3 rounded"
-                        value={form.name}
-                        onChange={(e) =>
-                            setForm({ ...form, name: e.target.value })
-                        }
-                    />
+                    <Input required={"required"} type={"text"} placeholder={"Full Name"}
+                        value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
 
                     <textarea
                         required
                         placeholder="Full Address"
-                        className="w-full border p-3 rounded"
                         value={form.address}
                         onChange={(e) =>
                             setForm({ ...form, address: e.target.value })
                         }
+                        className="w-full mb-3 px-3 py-2 min-h-25 border border-gray-300 rounded-md
+                                 bg-white text-sm resize-none
+                                 placeholder-gray-400
+                                   outline-none
+                                   transition-all duration-200
+                                 focus:border-[#e77600]
+                                    focus:ring-2 focus:ring-[#f0c14b]/40"
                     />
 
-                    <input
-                        required
-                        type="text"
-                        placeholder="City"
-                        className="w-full border p-3 rounded"
-                        value={form.city}
-                        onChange={(e) =>
-                            setForm({ ...form, city: e.target.value })
-                        }
-                    />
+                    <Input required={"required"} type={"text"} placeholder={"City"}
+                        value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} />
 
-                    <input
-                        required
-                        type="text"
-                        placeholder="Phone Number"
-                        maxLength={10}
-                        inputMode="numeric"
-                        className="w-full border p-3 rounded"
-                        value={form.phone}
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                phone: e.target.value.replace(/\D/g, ""),
-                            })
-                        }
-                    />
+                    <Input required={"required"} type={"text"} placeholder={"Phone Number"}
+                        value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value.replace(/\D/g, "") })} />
 
-                    <input
-                        required
-                        type="text"
-                        placeholder="Pincode"
-                        maxLength={6}
-                        inputMode="numeric"
-                        className="w-full border p-3 rounded"
-                        value={form.pincode}
-                        onChange={(e) =>
-                            setForm({
-                                ...form,
-                                pincode: e.target.value.replace(/\D/g, ""),
-                            })
-                        }
-                    />
-
+                    <Input required={"required"} type={"text"} placeholder={"Pincode"}
+                        value={form.pincode} onChange={(e) => setForm({ ...form, pincode: e.target.value.replace(/\D/g, "") })} />
 
                     <div>
                         <h3 className="font-semibold mb-3 text-lg">Payment Method</h3>
@@ -136,31 +101,32 @@ const Checkout = () => {
                             {["COD", "UPI", "CARD"].map((method) => (
                                 <label
                                     key={method}
-                                    className={`flex items-center gap-3 border p-3 rounded cursor-pointer ${payment === method
-                                        ? "border-blue-600 bg-blue-50"
-                                        : ""
+                                    className={`flex items-center gap-3 border p-3 rounded-md cursor-pointer transition-all duration-200
+                                   ${payment === method
+                                            ? "border-[#e77600] bg-[#fff8f0]"
+                                            : "border-gray-300 hover:border-[#e77600]"
                                         }`}
                                 >
+
                                     <input
                                         type="radio"
                                         name="payment"
                                         checked={payment === method}
                                         onChange={() => setPayment(method)}
+                                        className="w-4 h-4 accent-[#e77600] cursor-pointer"
                                     />
-                                    {method === "COD" && "Cash on Delivery"}
-                                    {method === "UPI" && "UPI Payment"}
-                                    {method === "CARD" && "Debit / Credit Card"}
+
+                                    <span className="text-sm font-medium text-gray-800">
+                                        {method === "COD" && "Cash on Delivery"}
+                                        {method === "UPI" && "UPI Payment"}
+                                        {method === "CARD" && "Debit / Credit Card"}
+                                    </span>
+
                                 </label>
                             ))}
                         </div>
                     </div>
-
-                    <button
-                        type="submit"
-                        className="w-full bg-[#131921] text-white py-3 rounded hover:bg-[#131921] transition font-semibold"
-                    >
-                        Place Order
-                    </button>
+                    <Button text={"Place Order"} type={"submit"} />
                 </form>
             </div>
 

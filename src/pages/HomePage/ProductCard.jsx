@@ -15,7 +15,6 @@ const ProductCard = ({ product }) => {
         <div key={product.id} className="bg-white w-[23%] p-4 rounded-md shadow">
 
             <h2 className="text-xl font-bold text-black mb-3">Keep Shopping For Smartphones</h2>
-
             <Link to={`/${product.subSlug}/${product.slug}`}>
                 <div className="flex justify-center overflow-hidden">
                     <img src={selectedImage} className="h-48 object-contain transition-transform duration-300 ease-in-out transform hover:scale-110" />

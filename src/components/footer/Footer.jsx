@@ -20,7 +20,6 @@ const Footer = () => {
     return (
         <footer className="mt-10">
 
-            {/* BACK TO TOP */}
             <div
                 onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
                 className="bg-[#37475A] text-white text-center py-3 cursor-pointer hover:bg-[#485769]"

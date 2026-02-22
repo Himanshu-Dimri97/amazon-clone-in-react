@@ -39,3 +39,27 @@ export const getProductBySlug = async (slug) => {
     console.log(data);
     return data[0];
 };
+
+export const loginUser = async (email) => {
+    const res = await fetch(`${BASE_URL}/users?email=${email}`);
+    return res.json();
+};
+
+export const signupUser = async (user) => {
+
+    const checkRes = await fetch(`${BASE_URL}/users?email=${user.email}`);
+    const checkData = await checkRes.json();
+
+    if (checkData.length > 0) {
+        throw new Error("User with this email already exists");
+    }
+
+    const res = await fetch(`${BASE_URL}/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+    });
+
+    return res.json();
+};
+

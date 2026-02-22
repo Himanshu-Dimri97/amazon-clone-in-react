@@ -6,19 +6,18 @@ import slider1 from "../../assets/slider-1.jpg";
 import slider2 from "../../assets/slider-2.jpg";
 import slider3 from "../../assets/slider-3.jpg";
 import { data } from "./bannerCardData";
+import { Link } from "react-router-dom";
 
 
 const slides = [slider1, slider2, slider3];
 
 const FullscreenSlider = () => {
     const settings = {
-        // dots: true,          
         infinite: true,
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
         arrows: true,
-        // autoplay: true,  
         autoplaySpeed: 3000,
     };
     return (
@@ -46,10 +45,12 @@ const FullscreenSlider = () => {
                                         {
                                             item.imgData.map((dt, index) => {
                                                 return (
-                                                    <div key={index} className="">
-                                                        <img src={dt.img} />
-                                                        <a href="#" className="text-black text-[12px] leading-4 inline-block">{dt.title}</a>
-                                                    </div>
+                                                    <Link to={"/"} key={index}>
+                                                        <div className="">
+                                                            <img src={dt.img} />
+                                                            <span className="text-black text-[12px] leading-4 inline-block">{dt.title}</span>
+                                                        </div>
+                                                    </Link>
                                                 )
 
                                             })

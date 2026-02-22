@@ -2,6 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { getProductBySlug } from "../api/api";
 import { CartContext } from "../context/CartContext";
+import Button from "../components/Button";
 
 const ProductDetail = () => {
     const { slug } = useParams();
@@ -21,6 +22,14 @@ const ProductDetail = () => {
             setMainImg(product.images[0]);
         }
     }, [product]);
+
+    const onclick = () => {
+        if (isAdded) {
+            navigate("/cart");
+        } else {
+            addToCart(product);
+        }
+    }
 
     if (!product) {
         return (
@@ -137,22 +146,11 @@ const ProductDetail = () => {
                     FREE delivery available
                 </p>
 
-                <button
-                    onClick={() => {
-                        if (isAdded) {
-                            navigate("/cart");
-                        } else {
-                            addToCart(product);
-                        }
-                    }}
-                    className={`w-full py-2 rounded-full font-medium transition 
+                <Button text={isAdded ? "Go to Cart" : "Add to Cart"} type={"button"} onClick={onclick} className={`w-full py-2 rounded-full font-medium transition 
                         ${isAdded
-                            ? "bg-orange-500 text-white hover:bg-orange-600"
-                            : "bg-yellow-400 hover:bg-yellow-500"
-                        }`}
-                >
-                    {isAdded ? "Go to Cart" : "Add to Cart"}
-                </button>
+                        ? "bg-[#f08804] text-black! hover:bg-orange-500"
+                        : "bg-yellow-400 text-black! hover:bg-yellow-500"
+                    }`} />
 
                 <div className="text-xs text-gray-600 pt-2">
                     Secure transaction
