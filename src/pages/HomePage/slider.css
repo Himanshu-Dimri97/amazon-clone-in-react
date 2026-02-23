@@ -16,5 +16,16 @@
 
 .slick-next {
     right: 50px;
-    top: 25%;
+    z-index: 9;
+    top: 25%
+}
+
+@media (max-width: 767px) {
+    .slick-prev {
+        top: 50%;
+    }
+
+    .slick-next {
+        top: 50%;
+    }
 }

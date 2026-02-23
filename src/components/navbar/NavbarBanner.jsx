@@ -32,40 +32,41 @@ const NavbarBanner = () => {
 
 
     return (
-        <div className="flex items-center gap-4 px-3 bg-[#232f3e] h-10 overflow-x-auto">
+        <div className="relative bg-[#232f3e]">
 
-            <div className="flex items-center gap-1 border border-transparent hover:border-white px-2 cursor-pointer">
-                <Menu className="text-white" size={20} />
-                <span className="text-white font-bold text-sm">All</span>
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-6 bg-linear-to-r from-[#232f3e] to-transparent z-10"></div>
+
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-linear-to-l from-[#232f3e] to-transparent z-10"></div>
+
+            <div className="flex items-center gap-3 px-4 h-10 overflow-x-auto whitespace-nowrap scroll-smooth no-scrollbar">
+
+
+                {links.map((link) => {
+                    let path = "#";
+
+                    if (link.type === "static") path = link.path;
+
+                    if (link.type === "category") {
+                        const slug = categoryMap[link.refId];
+                        path = slug ? `/${slug}` : "#";
+                    }
+
+                    if (link.type === "subcategory") {
+                        const slug = subMap[link.refId];
+                        path = slug ? `/${slug}` : "#";
+                    }
+
+                    return (
+                        <Link
+                            key={link.id}
+                            to={path}
+                            className="text-white font-semibold text-sm border border-transparent hover:border-white px-3 py-1 shrink-0 transition"
+                        >
+                            {link.name}
+                        </Link>
+                    );
+                })}
             </div>
-
-            {links.map((link) => {
-
-                let path = "#";
-
-                if (link.type === "static") {
-                    path = link.path;
-                }
-                if (link.type === "category") {
-                    const slug = categoryMap[link.refId];
-                    path = slug ? `/${slug}` : "#";
-                }
-
-                if (link.type === "subcategory") {
-                    const slug = subMap[link.refId];
-                    path = slug ? `/${slug}` : "#";
-                }
-
-                return (
-                    <Link
-                        key={link.id}
-                        to={path}
-                        className="text-white font-semibold text-sm border border-transparent hover:border-white px-2 py-1 whitespace-nowrap"
-                    >
-                        {link.name}
-                    </Link>
-                );
-            })}
         </div>
     );
 };
