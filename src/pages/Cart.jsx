@@ -21,9 +21,9 @@ const Cart = () => {
   return (
     <div className="bg-gray-100 min-h-screen p-6">
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
 
-        <div className="md:col-span-2 bg-white p-6 rounded-lg shadow">
+        <div className="col-span-12 md:col-span-7 bg-white p-6 rounded-lg shadow">
 
           <h2 className="text-2xl font-semibold border-b pb-4 mb-4">
             Shopping Cart
@@ -41,18 +41,14 @@ const Cart = () => {
             </div>
           ) : (
             cart.map(item => (
-              <div
-                key={item.id}
-                className="flex gap-6 border-b py-6"
-              >
+              <div key={item.id} className="grid grid-cols-12 gap-6 border-b py-6">
+                <div className="col-span-12 md:col-span-3 mx-auto">
+                  <img src={item.images[0]} alt="" className="w-32 h-32 object-contain" />
 
-                <img
-                  src={item.images[0]}
-                  alt=""
-                  className="w-32 h-32 object-contain"
-                />
+                </div>
 
-                <div className="flex-1">
+
+                <div className="col-span-12 md:col-span-6 flex-1 mx-auto">
 
                   <h3 className="font-semibold text-lg">
                     {item.title}
@@ -92,7 +88,7 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <div className="font-bold text-lg">
+                <div className="col-span-12 md:col-span-3 font-bold text-lg mx-auto">
                   ₹{item.price * item.qty}
                 </div>
               </div>
@@ -101,7 +97,7 @@ const Cart = () => {
         </div>
 
         {cart.length > 0 && (
-          <div className="bg-white p-6 rounded-lg shadow h-fit">
+          <div className="col-span-12 md:col-span-5 bg-white p-6 rounded-lg shadow h-fit">
 
             <h3 className="text-xl font-semibold mb-4">
               Order Summary

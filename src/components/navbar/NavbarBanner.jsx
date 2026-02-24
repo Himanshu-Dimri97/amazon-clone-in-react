@@ -38,7 +38,7 @@ const NavbarBanner = () => {
 
             <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-linear-to-l from-[#232f3e] to-transparent z-10"></div>
 
-            <div className="flex items-center gap-3 px-4 h-10 overflow-x-auto whitespace-nowrap scroll-smooth no-scrollbar">
+            <div className="flex items-center gap-6 px-4 h-10 overflow-x-auto whitespace-nowrap scroll-smooth no-scrollbar">
 
 
                 {links.map((link) => {
@@ -60,7 +60,7 @@ const NavbarBanner = () => {
                         <Link
                             key={link.id}
                             to={path}
-                            className="text-white font-semibold text-sm border border-transparent hover:border-white px-3 py-1 shrink-0 transition"
+                            className="text-white font-semibold text-sm border border-transparent hover:border-white px-1 py-1 shrink-0 transition"
                         >
                             {link.name}
                         </Link>

@@ -31,6 +31,7 @@ const ProductPage = () => {
                 setLoading(false);
             } else {
                 setProducts([]);
+                setLoading(false);
             }
         });
     }, [slug]);
@@ -52,17 +53,24 @@ const ProductPage = () => {
     return (
         <div>
 
-            <div className="flex justify-evenly gap-3 bg-white h-12 shadow border-b-[#333]">
-                {options.map((option, index) => (
-                    <Link to="#" key={index} className="pt-4">
-                        <div className="text-xs text-[#333]">{option.name}</div>
-                    </Link>
-                ))}
+            <div className="relative">
+                <div className="pointer-events-none absolute left-0 top-0 h-full w-6 bg-linear-to-r from-[#ffff] to-transparent z-10"></div>
+                <div className="pointer-events-none absolute right-0 top-0 h-full w-6 bg-linear-to-l from-[#ffff] to-transparent z-10"></div>
+
+                <div className="flex gap-10 px-5 h-10 overflow-x-auto whitespace-nowrap scroll-smooth no-scrollbar">
+                    {options.map((option, index) => (
+                        <Link to="#" key={index} className="pt-4">
+                            <div className="text-xs text-[#333]">{option.name}</div>
+                        </Link>
+                    ))}
+                </div>
+
             </div>
+
 
             <div className="flex p-5 w-full">
 
-                <div className="w-[15%] border-r-2 border-r-[#ddd]">
+                <div className="w-30% sm:w-[25%] lg:w-[15%] border-r-2 border-r-[#ddd]">
                     <h3 className="text-sm font-bold text-black mb-2">Category</h3>
                     <div className="text-sm text-[#0f1111] font-normal">
                         <Link to={"/"} className="flex leading-none mb-1.5 hover:text-[#c45500]">
@@ -94,7 +102,7 @@ const ProductPage = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-3 w-[85%] gap-6 p-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 w-[70%] sm:w-[75%] lg:w-[85%] mx-auto gap-6 p-6">
                     {products.length > 0 ? (
                         products.map((item) => (
                             <ProductCard key={item.id} product={item} />
@@ -105,6 +113,7 @@ const ProductPage = () => {
                 </div>
 
             </div>
+
         </div>
     );
 };

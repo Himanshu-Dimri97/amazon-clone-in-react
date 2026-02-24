@@ -7,6 +7,7 @@ import { CartContext } from "../../context/CartContext";
 import { AuthContext } from "../../context/AuthContext";
 import Button from "../Button";
 import Searchbar from "../Searchbar";
+import { User } from "lucide-react";
 
 const NavbarBelt = () => {
     const { cart } = useContext(CartContext);
@@ -15,13 +16,13 @@ const NavbarBelt = () => {
 
     return (
         <>
-            <div className='flex justify-between px-6 lg:px-1 bg-[#131921] h-15 p-1'>
+            <div className='flex justify-between px-5 lg:px-1 bg-[#131921] h-15 p-1'>
                 <Link to={'/'} className='flex px-1 pt-3 border border-transparent hover:border hover:border-white'>
                     <img src={logo} className='h-10 w-25' />
                     <span className='text-white text-sm pt-1'>.in</span>
                 </Link>
                 <div className="hidden lg:block">
-                    <div className='px-1 pt-2 border border-transparent hover:border hover:border-white cursor-pointer'>
+                    <div className='px-1 py-2 border border-transparent hover:border hover:border-white cursor-pointer'>
                         <p className='text-[12px] text-white pl-5'>Delivering to New Delhi 110020</p>
                         <div className='flex'>
                             <MapPin className="w-4.5 h-4.5 text-white" />
@@ -62,7 +63,7 @@ const NavbarBelt = () => {
                                 </div>
                             </div>
 
-                            <div className="absolute hidden group-hover:block right-0 mt-3 bg-white text-black rounded shadow-lg">
+                            <div className="absolute hidden group-hover:block right-0 mt-3 bg-white text-black rounded shadow-lg z-50">
                                 <div className="absolute right-3 -top-2 w-0 h-0
                                             border-l-8 border-l-transparent
                                             border-r-8 border-r-transparent
@@ -81,13 +82,13 @@ const NavbarBelt = () => {
                                       group-hover:border-white
                                       group-hover:border-t-[#131921]'>
 
-                                <span className='text-white text-[12px]'>Hello, sign in</span>
+                                <span className='text-white text-[12px] block max-sm:hidden'>Hello, sign in</span>
 
-                                <div className='flex items-center gap-1'>
-                                    <span className='text-white text-sm font-bold leading-none'>
+                                <div className='flex items-center gap-1 max-sm:pt-3'>
+                                    <span className='text-white text-sm font-bold leading-none block max-sm:hidden'>
                                         Account & Lists
                                     </span>
-
+                                    <User className="hidden max-sm:block text-white" size={18} />
                                     <div className="w-0 h-0
                                                 border-l-4 border-l-transparent
                                                 border-r-4 border-r-transparent
@@ -120,7 +121,7 @@ const NavbarBelt = () => {
                         )
                 }
                 <div className="hidden lg:block">
-                    <div className='px-1 pt-1 border border-transparent hover:border hover:border-white cursor-pointer'>
+                    <div className='px-1 pt-1 pb-2 border border-transparent hover:border hover:border-white cursor-pointer'>
                         <span className='text-white text-[12px]'>Return</span>
                         <p className='text-white text-sm font-bold leading-none'>& Orders</p>
                     </div>
@@ -136,7 +137,7 @@ const NavbarBelt = () => {
                     </Link>
                 </div>
             </div>
-            <div className="sm:hidden px-6 pb-2 bg-[#131921]">
+            <div className="sm:hidden px-5 py-1 bg-[#131921]">
                 <Searchbar />
             </div>
         </>

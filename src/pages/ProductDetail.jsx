@@ -52,9 +52,9 @@ const ProductDetail = () => {
     const isAdded = cart.some(item => item.id === product.id);
 
     return (
-        <div className="w-full mx-auto px-6 py-8 grid grid-cols-12 gap-6">
+        <div className="w-full mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-6">
 
-            <div className="col-span-4 flex gap-4">
+            <div className="col-span-12 md:col-span-4 flex gap-4">
 
                 <div className="flex flex-col gap-3">
                     {product.images.map((img, i) => (
@@ -70,12 +70,12 @@ const ProductDetail = () => {
                 <div className="flex-1 overflow-hidden group">
                     <img
                         src={mainImg}
-                        className="w-full object-contain transition-transform duration-300 group-hover:scale-125"
+                        className="w-full h-75 md:h-auto object-contain transition-transform duration-300 group-hover:scale-125"
                     />
                 </div>
             </div>
 
-            <div className="col-span-5 space-y-4">
+            <div className="col-span-12 md:col-span-5 space-y-4">
 
                 <h1 className="text-2xl font-medium leading-tight">
                     {product.title}
@@ -136,7 +136,7 @@ const ProductDetail = () => {
                 </div>
             </div>
 
-            <div className="col-span-3 border rounded-lg p-5 space-y-4 h-fit sticky top-20 shadow-sm">
+            <div className="col-span-12 md:col-span-3 border rounded-lg p-5 space-y-4 h-fit sticky top-20 shadow-sm">
 
                 <div className="text-2xl font-semibold text-black">
                     ₹{discountPrice}
@@ -156,6 +156,7 @@ const ProductDetail = () => {
                     Secure transaction
                 </div>
             </div>
+
         </div>
     );
 };
